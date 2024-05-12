@@ -90,15 +90,15 @@ class ASSITANTWEBUI():
         
         # OpenAI API
         try:
-            os.remove(self.audios_path+"/audio.wav")
-            shutil.move(str(audio), self.audios_path+"/audio.wav")
-            audio_file= open("audios/audio.wav", "rb")
+            #shutil.move(str(audio), self.audios_path+"/audio.wav")
+            audio_file= open(str(audio), "rb")
             transcript = self.client.audio.transcriptions.create(
                 model="whisper-1",
-                file=audio_file, 
+                file=audio_file,
                 response_format="text"
             )
             print(transcript)
+            os.remove(str(audio))
             return transcript
         except Exception as e:
             print(e)
